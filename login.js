@@ -30,7 +30,7 @@ login({ email, password }, option, (err, api) => {
 			case "login-approval":
 				if (otpkey) err.continue(totp(otpkey));
 				else {
-					console.log("Nhập mã xác minh 2 lớp:");
+					console.log("Enter the 2-factor verification code:");
 					rl.on("line", line => {
 						err.continue(line);
 						rl.close();
@@ -45,6 +45,6 @@ login({ email, password }, option, (err, api) => {
 	}
 	const json = JSON.stringify(api.getAppState());
 	fs.writeFileSync(`./${config.APPSTATEPATH}`, json);
-	console.log("Đã ghi xong appstate!");
+	console.log("Appstate has been recorded!");
 	process.exit(0);
 });
